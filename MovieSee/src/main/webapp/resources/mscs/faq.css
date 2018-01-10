@@ -1,0 +1,293 @@
+@CHARSET "UTF-8";
+
+/* 
+faq .faqBody .article .q {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	margin: 20px 10px;
+	font-size: 15px;
+	padding: 1px;
+	border-bottom: 1px solid #dedede;
+}  
+ */
+.q {
+	background: #ffffff;
+	font-size: 13px;
+	line-height: 22px;
+	color: #666;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	padding: 10px 10px 25px 0px;
+}
+
+.faq .faqBody .article .a {
+	border-top: 1px solid #dedede;
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	margin: 20px 10px;
+	margin: 20px 0px;
+	position: relative;
+	width: 980px;
+	padding: 30px 20px 0px 70px;
+	background: #ffffff;
+	font-size: 13px;
+	line-height: 22px;
+	color: #666;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+
+}
+
+.faq .A{
+    	position: absolute;
+    	left: 20px;
+    	top: 30px;
+    	font-family: 'linlivertine';
+    	font-style: italic;
+    	font-weight: bold;
+    	font-size: 30px;
+    	color: #e01e27;
+}
+
+.shPeriod.goods.boardBt {
+	min-width: 50px;
+	text-align: center;
+	height: 28px;
+	border: 0;
+	background: #231f20;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.goods input[type="text"] {
+
+	height: 30px;
+	padding: 0 10px;
+	border: none;
+	font-size: 20px;
+	color: #666;
+	line-height: 30px;
+	background: #fff;
+
+}
+
+.mem_title {
+	margin: 40px 0 16px;
+    font-size: 18px;
+    color: #231f20;
+    font-weight: bold;
+
+}
+
+
+.sh {
+	padding: 20px 30px;
+    background: #f5f5f5;
+}
+
+.sh .go{
+	float: left;
+    padding: 0 88px 22px;
+    margin: 0;
+    border: 0;
+}
+
+.ti {
+	float: left;
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.go .ipt {
+    width: 622px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.go .bo {
+	width: 50px;
+    height: 30px;
+    border: 0;
+    background: #34373c;
+    color: #fefeff;
+
+}
+
+.view {
+	clear: both;
+    margin: 0 0 0 114px;
+    padding-top: 20px;
+    border-top: 1px solid #dedede;
+}
+
+.view .txt1 {
+	float: left;
+    padding: 0 50px 0 25px;
+    color: #666;
+    font-size: 13px;
+    line-height: 16px;
+    background: url(/movie/images/bg/bg_error4.png) no-repeat left 50%;
+
+}
+
+.view [class^=bt_] {
+    display: inline;
+    min-width: auto;
+    color: #231f20;
+    padding: 0 23px 0 0;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    background: url(/movie/images/icon/icn_btnaw1.png) no-repeat right 50%;
+}
+
+.cs_center .bt_use {
+    margin-left: 30px;
+}
+
+.tblfaq {
+	width: 100%;
+    border: 0;
+    border-top: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+    font-size: 13px;
+
+}
+
+.btn-wrap{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 8px 0;
+    background: #efefef;
+    border: 1px solid #dedede;
+    text-align: center;
+    font-size: 14px;
+    color: #231f20;
+    font-weight: bold;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.button{
+	padding-bottom: 6px;
+    background: url('/movie/image/btn/btn_plus02.png') no-repeat 50% 100%;
+
+}
+
+.cs_center .shPeriod .tit {
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.shPeriod .tit {
+    display: inline-block;
+    width: 111px;
+    font-weight: bold;
+    color: #231f20;
+}
+
+.cs_center .shPeriod .goods {
+    float: left;
+    padding: 0 0 22px;
+    margin: 0;
+    border: 0;
+}
+
+.cs_center .shPeriod .goods .btn_goodsSrch {
+    width: 50px;
+    height: 30px;
+    border: 0;
+    background: #34373c;
+    color: #fefeff;
+}
+
+.sh_view {
+    clear: both;
+    margin: 0 0 0 114px;
+    padding-top: 20px;
+    border-top: 1px solid #dedede;
+}
+
+.sh_view .txt {
+    float: left;
+    padding: 0 50px 0 25px;
+    color: #666;
+    font-size: 13px;
+    line-height: 16px;
+    background: url('/movie/images/bg/bg_error4.png') no-repeat left 50%;
+}
+
+.sh_view [class^=btnv1_] {
+    display: inline;
+    min-width: auto;
+    color: #231f20;
+    padding: 0 23px 0 0;
+    border: none;
+    background: url('/movie/images/icon/icn_btnaw1.png') no-repeat right 50%;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+.cs_center .btnv1_use {
+    margin-left: 30px;
+}
+
+.faq .faqBody .article .q span {
+	float: right;
+}
+
+.faq .faqBody .article .q .a1{
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	margin: 100px;
+	font-size: 13px;
+	padding: 10px 10px 0 0;
+}
+
+.faq .faqBody .article .Q{
+	font-size: 14px;
+	font-weight: bold;
+	font-size: 14px;
+
+}
+.faq .faqBody .article .Q span{
+	font-size: 22px;
+	padding: 0 12px 0 0;
+}
+
+.faqBody{
+	border-bottom:0.5px solid #c0c0c0;
+	padding: 10px 10px 25px 0px;
+}
+
+.cs_center .shPeriod .goods .btn_goodsSrch2 {
+	width:50px;
+	height:30px;
+	border:0;
+	background:#34373c;
+	color:#fefeff;
+	padding: 0px;
+	margin: 20px;
+}
+
+.tit2 {
+	margin: 20px;
+	float: left;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: bold;
+}

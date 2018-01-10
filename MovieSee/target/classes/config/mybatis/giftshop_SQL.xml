@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 공지사항 namespace -->
+<mapper namespace="giftshop">
+
+	<resultMap type="giftShopProductModel" id="giftShopProductModelRes">
+		<result property="giftshop_product_no" column="giftshop_product_no" />
+		<result property="giftshop_product_category" column="giftshop_product_category" />
+		<result property="giftshop_product_name" column="giftshop_product_name" />
+		<result property="giftshop_product_price" column="giftshop_product_price" />
+		<result property="giftshop_product_file" column="giftshop_product_file" />
+		<result property="giftshop_product_restrictions" column="giftshop_product_restrictions" />
+		<result property="giftshop_product_periodofuse" column="giftshop_product_periodofuse" />
+		<result property="giftshop_product_desc1" column="giftshop_product_desc1" />
+		<result property="giftshop_product_desc2" column="giftshop_product_desc2" />
+		<result property="giftshop_product_desc3" column="giftshop_product_desc3" />
+		<result property="giftshop_product_date" column="giftshop_product_date" />
+		<result property="giftshop_product_components" column="giftshop_product_components" />
+		<result property="giftshop_product_count" column="giftshop_product_count" />
+	</resultMap>
+
+	<resultMap type="mainGiftShopPurchaseModel" id="mainGiftShopPurchaseModelRes">
+		<result property="giftpurchase_no" column="giftpurchase_no" />
+		<result property="giftshop_product_no" column="giftshop_product_no" />
+		<result property="giftpurchase_member_id" column="giftpurchase_member_id" />
+		<result property="giftpurchase_product_name" column="giftpurchase_product_name" />
+		<result property="giftpurchase_count" column="giftpurchase_count" />
+		<result property="giftpurchase_price" column="giftpurchase_price" />
+		<result property="giftpurchase_date" column="giftpurchase_date" />
+		<result property="giftpurchase_delshow" column="giftpurchase_delshow" />
+		<result property="giftpurchase_product_image" column="giftpurchase_product_image" />
+	</resultMap>
+
+	<sql id="select-all">
+		select * from giftshop_product
+	</sql>
+
+	<!-- 페이징 sql -->
+	<sql id="pagingHeader">
+		select * from (select rownum as rn, a.* from (
+	</sql>
+	<sql id="pagingFooter">
+		)a ) where rn between #{start} and #{end}
+	</sql>
+
+	<!-- 검색 조건 -->
+	<sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				where (giftshop_product_name like
+				'%'||#{keyword}||'%' or
+				giftshop_product_price like
+				'%'||#{keyword}||'%' or
+				giftshop_product_desc1 like
+				'%'||#{keyword}||'%')
+			</when>
+
+			<!-- 전체 검색이 아닐 경우 -->
+			<otherwise>
+				where (${searchOption} like '%'||#{keyword}||'%')
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<sql id="search_member">
+		<choose>
+			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				where (giftpurchase_product_name like
+				'%'||#{keyword}||'%' or
+				giftpurchase_price like
+				'%'||#{keyword}||'%')
+			</when>
+
+			<!-- 전체 검색이 아닐 경우 -->
+			<otherwise>
+				where (${searchOption} like '%'||#{keyword}||'%')
+			</otherwise>
+		</choose>
+	</sql>
+
+	<!-- 상품 등록 -->
+	<insert id="gspWrite" parameterType="giftShopProductModel">
+		insert into giftshop_product
+		(giftshop_product_no,
+		giftshop_product_name,
+		giftshop_product_category,
+		giftshop_product_price,
+		giftshop_product_file,
+		giftshop_product_restrictions,
+		giftshop_product_periodofuse,
+		giftshop_product_desc1,
+		giftshop_product_desc2,
+		giftshop_product_desc3,
+		giftshop_product_date,
+		giftshop_product_components,
+		giftshop_product_count)
+		values
+		(giftshop_product_no_seq.NEXTVAL,
+		#{giftshop_product_name},
+		#{giftshop_product_category},
+		#{giftshop_product_price},
+		#{giftshop_product_file},
+		#{giftshop_product_restrictions},
+		#{giftshop_product_periodofuse},
+		#{giftshop_product_desc1},
+		#{giftshop_product_desc2},
+		#{giftshop_product_desc3},
+		sysdate,
+		#{giftshop_product_components},
+		#{giftshop_product_count})
+	</insert>
+
+	<select id="gspListProduct" resultMap="giftShopProductModelRes">
+		<include refid="pagingHeader" />
+		select rownum, giftshop_product_no, giftshop_product_name,
+		giftshop_product_category,
+		giftshop_product_price,
+		giftshop_product_file,
+		giftshop_product_restrictions,
+		giftshop_product_periodofuse, giftshop_product_desc1,
+		giftshop_product_desc2, giftshop_product_desc3, giftshop_product_date,
+		giftshop_product_components, giftshop_product_count
+		from
+		giftshop_product
+		<include refid="search" />
+		order by giftshop_product_no desc, giftshop_product_date desc
+		<include refid="pagingFooter"></include>
+	</select>
+
+	<!-- main 영화 관람권 목록 -->
+	<select id="gspList_1" resultMap="giftShopProductModelRes">
+		<include refid="pagingHeader" />
+		select rownum, giftshop_product_no, giftshop_product_name,
+		giftshop_product_category,
+		giftshop_product_price,
+		giftshop_product_file,
+		giftshop_product_restrictions,
+		giftshop_product_periodofuse, giftshop_product_desc1,
+		giftshop_product_desc2, giftshop_product_desc3, giftshop_product_date,
+		giftshop_product_components, giftshop_product_count
+		from
+		giftshop_product
+		<include refid="search" />
+		and giftshop_product_category = '영화 관람권'
+		order by giftshop_product_no
+		desc, giftshop_product_date desc
+		<include refid="pagingFooter"></include>
+	</select>
+
+	<!-- main 매점 상품권 목록 -->
+	<select id="gspList_2" resultMap="giftShopProductModelRes">
+		<include refid="pagingHeader" />
+		select rownum, giftshop_product_no, giftshop_product_name,
+		giftshop_product_category,
+		giftshop_product_price,
+		giftshop_product_file,
+		giftshop_product_restrictions,
+		giftshop_product_periodofuse, giftshop_product_desc1,
+		giftshop_product_desc2, giftshop_product_desc3, giftshop_product_date,
+		giftshop_product_components, giftshop_product_count
+		from
+		giftshop_product
+		<include refid="search" />
+		and giftshop_product_category = '매점 상품권'
+		order by giftshop_product_no
+		desc, giftshop_product_date desc
+		<include refid="pagingFooter"></include>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from giftshop_product
+		<include refid="search" />
+	</select>
+
+	<select id="gspGetSEQ" resultType="int">
+		select
+		giftshop_product_no_seq.NEXTVAL
+		from dual
+	</select>
+
+	<!-- 상품 상세 보기 -->
+	<select id="gspView" resultMap="giftShopProductModelRes">
+		<include refid="select-all" />
+		where giftshop_product_no = #{giftshop_product_no}
+	</select>
+
+	<!-- update -->
+	<!-- 상품 수정 -->
+	<insert id="gspUpdate" parameterType="giftShopProductModel">
+		update giftshop_product
+		set
+		giftshop_product_name = #{giftshop_product_name},
+		giftshop_product_category = #{giftshop_product_category},
+		giftshop_product_price = #{giftshop_product_price},
+		giftshop_product_file = #{giftshop_product_file},
+		giftshop_product_restrictions = #{giftshop_product_restrictions},
+		giftshop_product_periodofuse = #{giftshop_product_periodofuse},
+		giftshop_product_desc1 = #{giftshop_product_desc1},
+		giftshop_product_desc2 = #{giftshop_product_desc2},
+		giftshop_product_desc3 = #{giftshop_product_desc3},
+		giftshop_product_date = sysdate,
+		giftshop_product_components =
+		#{giftshop_product_components},
+		giftshop_product_count =
+		#{giftshop_product_count}
+		where giftshop_product_no =
+		#{giftshop_product_no}
+	</insert>
+
+	<!-- 상품 삭제 -->
+	<delete id="gspDelete">
+		delete from giftshop_product
+		where giftshop_product_no
+		= #{giftshop_product_no}
+	</delete>
+
+	<!-- 회원 상품 구매 -->
+	<insert id="mgsIt" parameterType="mainGiftShopPurchaseModel">
+		insert into giftshop_purchase
+		(giftpurchase_no,
+		giftshop_product_no,
+		giftpurchase_member_id,
+		giftpurchase_product_name,
+		giftpurchase_count,
+		giftpurchase_price,
+		giftpurchase_date,
+		giftpurchase_delshow,
+		giftpurchase_product_image)
+		values
+		(giftpurchase_no_seq.NEXTVAL,
+		#{giftshop_product_no},
+		#{giftpurchase_member_id},
+		#{giftpurchase_product_name},
+		#{giftpurchase_count},
+		#{giftpurchase_price},
+		sysdate,
+		'y',
+		#{giftpurchase_product_image})
+	</insert>
+
+	<!-- 회원이 구매한 상품 목록 -->
+	<select id="mgsMemberList" resultMap="mainGiftShopPurchaseModelRes">
+		<include refid="pagingHeader" />
+		select rownum, giftpurchase_no, giftshop_product_no, giftpurchase_member_id, giftpurchase_product_name, giftpurchase_count,
+		giftpurchase_price, giftpurchase_date, giftpurchase_delshow, giftpurchase_product_image
+		from giftshop_purchase
+		<include refid="search_member" /> 
+		and giftpurchase_member_id = #{giftpurchase_member_id}
+		and giftpurchase_delshow = 'y'
+		order by giftpurchase_no desc, giftpurchase_date desc	
+		<include refid="pagingFooter" />
+	</select>
+	
+	<!-- 회원이 구매할 상품 테이블의 상품 개수  -->
+	<select id="mgsProductCount" resultType="int">
+		select giftshop_product_count from giftshop_product
+		where giftshop_product_no = #{giftshop_product_no}
+	</select>
+
+	<!-- 회원이 구매한 상품 개수만큼 상품 테이블의 개수에서 빼기 -->
+	<update id="mgsSub">
+		update giftshop_product 
+		set
+		giftshop_product_count = giftshop_product_count - ${count}
+		where giftshop_product_no = #{giftshop_product_no}
+	</update>
+	
+	<!-- 회원이 구매한 게시글 레코드 갯수 -->
+	<select id="mgsMemberCount" resultType="int">
+		select count(*) from giftshop_purchase
+		<include refid="search_member" />
+		and giftpurchase_member_id = #{giftpurchase_member_id}
+		and giftpurchase_delshow = 'y'
+	</select>
+	
+	<!-- 회원이 구매를 취소 하였을 때, 삭제 처리하지 않고, 삭제의 유무 상태만 변경  why? 취소 내역 list를 띄우기 위해. -->
+	<update id="mgsMemberDel">
+   	 	update giftshop_purchase set giftpurchase_delshow = 'n' 
+   	 	where giftpurchase_no = #{giftpurchase_no}
+	</update>
+	
+	<!-- 회원이 구매를 취소 하였을 때, 취소 상품 개수만큼 상품 테이블의 개수에 더하기 -->
+	<update id="mgsPlus">
+   		update giftshop_product
+   		set
+   		giftshop_product_count = giftshop_product_count + ${count}
+   		where giftshop_product_no = #{giftshop_product_no}
+	</update>
+
+	<!-- 회원이 구매한 상품 상세보기 -->
+	<select id="mgsView" resultMap="mainGiftShopPurchaseModelRes">
+		select * from giftshop_purchase
+		where giftpurchase_no = #{giftpurchase_no}
+	</select>
+	
+	<!-- 회원이 구매한 상품 목록 -->
+	<select id="mgsMemberCancleList" resultMap="mainGiftShopPurchaseModelRes">
+		<include refid="pagingHeader" />
+		select rownum, giftpurchase_no, giftshop_product_no, giftpurchase_member_id, giftpurchase_product_name, giftpurchase_count,
+		giftpurchase_price, giftpurchase_date, giftpurchase_delshow, giftpurchase_product_image
+		from giftshop_purchase
+		<include refid="search_member" /> 
+		and giftpurchase_member_id = #{giftpurchase_member_id}
+		and giftpurchase_delshow = 'n'
+		order by giftpurchase_no desc, giftpurchase_date desc	
+		<include refid="pagingFooter" />
+	</select>
+	
+	<!-- 회원이  취소한 게시글 레코드 갯수 -->
+	<select id="mgsMemberCancleCount" resultType="int">
+		select count(*) from giftshop_purchase
+		<include refid="search_member" />
+		and giftpurchase_member_id = #{giftpurchase_member_id}
+		and giftpurchase_delshow = 'n'
+	</select>
+	
+</mapper>

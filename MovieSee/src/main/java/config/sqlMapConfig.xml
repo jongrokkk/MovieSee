@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration 
+PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
+	   " http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>	
+
+	<typeAliases>  
+	
+		<!-- event -->
+		<typeAlias alias="eventModel" type="movie.admin.event.EventModel"/>
+		
+		<!-- notice(공지사항) --> 
+		<typeAlias alias="noticeModel" type="movie.admin.notice.NoticeModel" />
+		
+		<!-- freeBoard -->
+		<typeAlias alias="freeBoardModel" type="movie.freeboard.FreeBoardModel"/>	   
+		
+		<!-- faq -->
+		<typeAlias alias="faqModel" type="movie.admin.faq.FaqModel" />	
+		
+		<!-- qna -->
+		<typeAlias alias="qnaModel" type="movie.admin.qna.QnaModel" />
+		<typeAlias alias="qnaCommentModel" type="movie.admin.qna.QnaCommentModel" />
+		
+		<!-- admin giftshop -->
+		<typeAlias alias="giftShopProductModel" type="movie.admin.giftshop.GiftShopProductModel"/>
+		<!-- member giftshop -->
+		<typeAlias alias="mainGiftShopPurchaseModel" type="movie.giftshop.MainGiftShopPurchaseModel"/>
+		
+		<!-- movie --> 
+		<typeAlias alias="movieModel" type="movie.movie.MovieModel" />
+		<typeAlias alias="moviebannerModel" type="movie.movie.MovieBannerModel" />
+		<typeAlias alias="movieintromodel" type="movie.movie.MovieIntroModel" />
+		<typeAlias alias="movieCommentModel" type="movie.movie.MovieCommentModel" />
+		<typeAlias alias="adminTimeTableModel" type="movie.admin.AdminTimeTableModel" />
+		<typeAlias alias="reserveTimeTableModel" type="movie.reserve.ReserveTimeTableModel"/>
+		<typeAlias alias="adminMovieModel" type="movie.admin.AdminMovieModel"/>
+		<typeAlias alias="reserveModel" type="movie.reserve.ReserveModel"/>
+		
+		<!-- member -->
+		<typeAlias alias="memberModel" type="movie.member.MemberModel"/>
+		
+	</typeAliases>
+	
+	<mappers>
+	
+		<!-- event -->
+		<mapper resource="config/mybatis/event_SQL.xml"/>
+	
+		<!-- notice(공지사항) -->
+		<mapper resource="config/mybatis/notice_SQL.xml"/>
+		
+		<!-- freeBoard -->
+		<mapper resource="config/mybatis/freeBoard_SQL.xml"/>
+		
+		<!-- faq -->
+		<mapper resource="config/mybatis/faq_SQL.xml"/>
+		
+		<!-- qna -->
+		<mapper resource="config/mybatis/qna_SQL.xml"/>
+		
+		<mapper resource="config/mybatis/giftshop_SQL.xml"/>
+		
+		<!-- movie -->
+		<mapper resource="config/mybatis/movie_SQL.xml"/>
+		<mapper resource="config/mybatis/admin_SQL.xml"/>
+		<mapper resource="config/mybatis/reserve_SQL.xml"/>
+		
+		<!-- member -->
+		<mapper resource="config/mybatis/member_SQL.xml"/>
+		
+	</mappers>
+	
+	
+</configuration>
